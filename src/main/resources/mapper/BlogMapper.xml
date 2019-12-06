@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.BlogMapper">
+	<cache flushInterval="60000" />
+
+	<!-- <cache-ref namespace=""/>对其他命名空间缓存配置的引用。 -->
+
+	<!-- 用来描述如何从数据库结果集中来加载对象。 -->
+	<!-- <resultMap type="" id="" /> -->
+
+	<!-- 可被其他语句引用的可重用语句块。 -->
+	<!-- <sql id="" lang=""/> -->
+
+	<!--  映射查询语句:查询和结果映射 -->
+	<select id="selectBlog" resultType="blog"><!-- 见 mybatis-standalone-config.xml配置的别名 -->
+		select * from Blog where id = #{id}
+	</select>
+
+	<!-- 映射更新语句 -->
+	<update id="updateWithId" parameterType="int">
+		update blog set
+		name=#{name} where id=#{id}
+	</update>
+</mapper>

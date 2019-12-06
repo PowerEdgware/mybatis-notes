@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="db.properties" />
+
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+
+		<!-- 全局缓存 -->
+		<setting name="cacheEnabled" value="true" />
+
+	</settings>
+
+	<!-- 类型别名 -->
+	<typeAliases>
+		<!-- 单独配置别名 -->
+		<!-- <typeAlias alias="Blog" type="com.study.entity.Blog" /> -->
+
+		<!-- 包下实体指定别名，默认是类 simpleName,且首字母小写。如com.study.entity.Blog 别名：blog -->
+		<package name="com.study.entity" />
+	</typeAliases>
+	<!-- 类型处理器：处理 PreparedStatement 参数(入参和出参类型) 值转为java类型 -->
+	<typeHandlers>
+		<!-- <typeHandler -->
+		<!-- handler="org.mybatis.example.ExampleTypeHandler"/> -->
+	</typeHandlers>
+
+	<!-- 插件（plugins） 拦截SQL调用 -->
+<!-- 	<plugins> -->
+		<!-- <plugin interceptor="org.mybatis.example.ExamplePlugin"> -->
+		<!-- <property name="someProperty" value="100" /> -->
+		<!-- </plugin> -->
+<!-- 	</plugins> -->
+
+	<!-- 多环境配置 指定不同的id，实现生产/测试等环节的切换，也可以配置多个环境，每个对应一个SqlSessionFactory -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- 映射器（mappers）:SQL 映射语句 ,找出 SQL 映射文件，进而找到sql-->
+	<mappers>
+		<!-- 使用相对于类路径的资源引用 -->
+		<mapper resource="mapper/BlogMapper.xml" />
+		<!-- 使用映射器接口实现类的完全限定类名 -->
+		<!-- <mapper class="org.mybatis.builder.BlogMapper" /> -->
+		<!-- 将包内的映射器接口实现全部注册为映射器 -->
+		<!-- <package name="com.study.mapper" /> -->
+	</mappers>
+</configuration>
